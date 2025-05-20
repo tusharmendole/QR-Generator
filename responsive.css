@@ -1,0 +1,58 @@
+@media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      padding: 40px;
+      gap: 30px;
+      height: auto;
+    }
+  
+    .left-section, .right-section {
+      width: 100%;
+    }
+    .logo {
+        width: 150px;
+        height: 150px;
+        background-image: url('T.mENole.png');
+        background-size: cover;
+        background-position: center;
+        border-radius: 50%;
+        margin-bottom: 30px;
+      }
+  
+    .phone-frame {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    #qr-card {
+      width: 100%;
+      max-width: 300px;
+      margin: -50px auto;
+    }
+  
+    .input-url {
+      width: 100%;
+      max-width: 400px;
+      height: 23px;
+    }
+
+    button {
+        margin-top: 2px;
+        height: 45px;
+      }
+
+      .qr-body {
+        background: linear-gradient(to right, #3b82f6, #9333ea);
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 280px;
+        font-family:'Times New Roman', Times, serif;  
+      }
+      
+      #download-btn{
+        margin-top:55px;
+      }
+  }
+  

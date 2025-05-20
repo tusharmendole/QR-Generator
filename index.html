@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+  <title>QR Code Generator</title>
+  <style>
+    
+  </style>
+</head>
+<!-- QR GENERATOR PAGE -->
+<body>
+  <nav class="navbar"> 
+    <!-- Logo -->
+    <div class="logo">
+    </div>
+
+    <!-- Nav Links -->
+    <ul class="nav-links">
+      <li class="nav-item">
+        <img src="home.png" alt="Home" class="icon">
+        <a href="Home.html">Home Page</a>
+      </li>
+      <li class="nav-item">
+        <img src="features.png" alt="Features" class="icon">
+        <a href="features.html">Features</a>
+      </li>
+      <li class="nav-item">
+        <img src="support.png" alt="Support" class="icon">
+        <a href="contact.html">Contact</a>
+      </li>
+      <li class="nav-item">
+        <img src="qr-code (1).png" alt="QR Code" class="icon">
+        <a href="index.html">QR Generator</a>
+      </li>
+        <li class="nav-item">
+          <img src="add-user.png" alt="sign in" class="signin">
+            <a href="sign_in.html">Sign in</a>
+    </ul>
+  </nav>
+  <div class="main">
+  <div class="container">
+    <div class="left-section">
+      <div class="Mainlogo"></div>
+      <input type="text" id="url" class="input-url" placeholder="Enter Url :- https://www.example.com"> 
+      <button onclick="generateQRCode()">Generate QR 🦾</button>
+    </div>
+
+    <div style="width: 1.5px; background-color: rgba(255,255,255,0.2);"></div>
+
+    <div class="right-section">
+      <div class="phone-frame">
+        <div id="qr-card">
+          <div class="qr-header">
+            <img src="logo.png" alt="Logo">
+            Prem Pizza Center
+          </div>
+          <div class="qr-body" id="qr-body">
+            <img id="default-qr" src="qr-code.png" alt="Default QR" width="160">
+          </div>
+          <div class="qr-footer">Scan the QR code for Digital Menu Cart</div>
+        </div>
+      </div>
+      <button id="download-btn" onclick="downloadQR()">Download QR 📥</button>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script>
+    function generateQRCode() {
+      const url = document.getElementById('url').value.trim();
+      const qrBody = document.getElementById('qr-body');
+    
+      if (!url) {
+        alert("Please enter a valid URL.");
+        return;
+      }
+    
+      qrBody.innerHTML = '<div class="spinner"></div>';
+    
+      setTimeout(() => {
+        qrBody.innerHTML = ''; // Remove spinner
+    
+        const canvas = document.createElement('canvas');
+        QRCode.toCanvas(canvas, url, {
+          width: 160,
+          margin: 5,
+          borderRadius:12,
+          color: {
+            dark: '#000',
+            light: '#ffff'
+          }
+        }, function (error) {
+          if (error) {
+            console.error(error);
+            qrBody.innerHTML = 'Error generating QR.';
+          } else {
+            canvas.style.borderRadius = "12px";  // <-- Rounded corners visually
+            qrBody.appendChild(canvas);
+          }
+        });
+      }, 1000);
+    }
+    
+    function downloadQR() {
+      const qrCard = document.getElementById('qr-card');
+    
+      html2canvas(qrCard, {
+        backgroundColor: 'rgba(0, 0, 0, 0)',  // Transparent background
+        useCORS: true           // In case of cross-origin images like your logo
+      }).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'custom-qr-card.png';
+        link.click();
+      });
+    }
+    </script>
+    
+
+    
+  </script>
+</body>
+</html>
